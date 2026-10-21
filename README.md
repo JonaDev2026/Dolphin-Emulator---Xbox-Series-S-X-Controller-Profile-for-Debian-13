@@ -1,4 +1,11 @@
+
+
+
+
+
 # Dolphin Emulator - Xbox Series S/X Controller Profiles for Debian 13
+
+https://github.com/user-attachments/assets/18732be8-2d01-414a-94f9-88131274cace
 
 This repository contains optimized Dolphin Emulator profiles (`.ini`) specifically mapped for using an **Xbox Series S/X Controller** via the **SDL driver** on **Debian 13 (Linux)**.
 
