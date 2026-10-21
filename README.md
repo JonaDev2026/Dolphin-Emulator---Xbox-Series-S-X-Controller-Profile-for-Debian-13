@@ -1,6 +1,6 @@
-# Dolphin Emulator - Xbox Series S/X Controller Profile for Debian 13
+# Dolphin Emulator - Xbox Series S/X Controller Profiles for Debian 13
 
-This repository contains an optimized Dolphin Emulator profile (`.ini`) specifically mapped for using an **Xbox Series S/X Controller** via the **SDL driver** on **Debian 13 (Linux)**.
+This repository contains optimized Dolphin Emulator profiles (`.ini`) specifically mapped for using an **Xbox Series S/X Controller** via the **SDL driver** on **Debian 13 (Linux)**.
 
 ## 📁 Repository Structure
 
@@ -9,52 +9,76 @@ This repository contains an optimized Dolphin Emulator profile (`.ini`) specific
 ├── README.md
 └── Profiles/
     └── Wiimote/
-        └── platformers-horizontal-wiimote.ini
+        ├── Wii_Wiimote_Sideways.ini
+        └── Wii_Classic_Controller.ini
 ```
+
+---
+
+## 📌 Profile Selection Guide
+
+| Profile File | Recommended Games | Extension Setting | Description |
+| :--- | :--- | :--- | :--- |
+| `Wii_Wiimote_Sideways.ini` | *New Super Mario Bros. Wii*, *Donkey Kong Country Returns*, *Sonic Colors* | `Extension = None` | Maps the Xbox controller as a horizontal Wii Remote. Extension is disabled to prevent the *"extension controller is not supported"* error. |
+| `Wii_Classic_Controller.ini` | *Mario Kart Wii*, *Super Smash Bros. Brawl*, *Xenoblade Chronicles*, *Zelda* | `Extension = Classic` | Enables the Wii Classic Controller extension for dual analog stick, trigger, and full button mapping like a modern gamepad. |
+
+---
 
 ## 🎮 Features & Mapping
 
-This profile includes dual mapping for maximum compatibility:
+### 1. Sideways Wiimote (`Wii_Wiimote_Sideways.ini`)
 
-* **Sideways Wiimote (Platformers):** Configured for 2D platformers (e.g., *New Super Mario Bros. Wii*).
-* **Classic Controller:** Full mapping for games supporting the Wii Classic Controller (e.g., *Mario Kart Wii*, *Smash Bros*).
-* **SDL Driver Integration:** Pre-configured with `SDL/0/Xbox Series X Controller` to prevent missing-device errors on Linux.
+| Xbox Button | Wiimote Action |
+| :--- | :--- |
+| **Xbox X** | Button 1 (Run / Fireball) |
+| **Xbox A** | Button 2 (Jump) |
+| **D-Pad** | D-Pad (Movement) |
+| **LB / RB** | Tilt / Shake (Spin Jump / Pick up items) |
+| **View / Menu** | `-` / `+` (Pause / Map) |
+| **Xbox Logo** | Home |
 
-| Xbox Button | Sideways Wiimote Mode | Classic Controller Mode |
-| --- | --- | --- |
-| **A** | Button 2 | Button B |
-| **B** | Button 1 | Button A |
-| **X** | Shake / Tilt | Button Y |
-| **Y** | Shake / Tilt | Button X |
-| **LB / RB** | Tilt Left / Right | L / R Triggers |
-| **LT / RT** | — | Analog Triggers (L / R) |
-| **D-Pad** | D-Pad | D-Pad |
-| **Left Stick** | Nunchuk Stick | Left Stick |
-| **Right Stick** | — | Right Stick |
-| **View / Menu** | `-` / `+` | `-` / `+` |
-| **Xbox Logo** | Home | Home |
+### 2. Classic Controller (`Wii_Classic_Controller.ini`)
+
+| Xbox Button | Classic Controller Action |
+| :--- | :--- |
+| **Xbox A** | Button B |
+| **Xbox B** | Button A |
+| **Xbox X** | Button Y |
+| **Xbox Y** | Button X |
+| **Left Stick** | Left Analog Stick |
+| **Right Stick** | Right Analog Stick |
+| **LT / RT** | Analog Triggers L / R |
+| **LB / RB** | Full Click L / R |
+| **D-Pad** | D-Pad |
+| **View / Menu** | `-` / `+` |
+| **Xbox Logo** | Home |
+
+---
 
 ## 🚀 Installation Guide
 
-### 1. Copy the Configuration File
+### 1. Copy the Configuration Files
 
-Copy the `.ini` file into your local Dolphin profile directory:
+Run the following commands in your Debian terminal to place the profile files into your local Dolphin configuration directory:
 
 ```bash
 mkdir -p ~/.config/dolphin-emu/Profiles/Wiimote/
-cp Profiles/Wiimote/platformers-horizontal-wiimote.ini ~/.config/dolphin-emu/Profiles/Wiimote/
+cp Profiles/Wiimote/*.ini ~/.config/dolphin-emu/Profiles/Wiimote/
 ```
 
 ### 2. Load the Profile in Dolphin
 
 1. Open **Dolphin Emulator**.
 2. Go to **Controllers** -> **Wii Remote 1** -> **Configure**.
-3. In the top-right corner under **Profile**, select `platformers-horizontal-wiimote`.
+3. In the top-right corner under **Profile**, select either `Wii_Wiimote_Sideways` or `Wii_Classic_Controller`.
 4. Click **Load**.
 5. Verify that the **Device** field in the top-left reads `SDL/0/Xbox Series X Controller`.
 6. Click **Close**.
 
-## 💡 Notes & Troubleshooting
+---
 
+## 💡 Troubleshooting & Notes
+
+* **"Extension controller is not supported" Error:** Games like *New Super Mario Bros. Wii* do not support the Classic Controller or Nunchuk. Always load the `Wii_Wiimote_Sideways` profile (`Extension = None`) for these games.
 * **GameCube Games:** For GameCube games, do not use the Wiimote menu. Configure **Port 1** as **Standard Controller** in the main Dolphin controller settings.
-* **Nunchuk Games:** If playing a game requiring a Nunchuk (e.g., *Super Mario Galaxy*), disable `Sideways Wiimote` under the **General and Options** tab in Dolphin after loading the profile.
+* **Device Selection on Linux:** If controls stop responding after loading a profile, ensure the **Device** drop-down at the top left is set to `SDL/0/Xbox Series X Controller`.
